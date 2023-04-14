@@ -92,7 +92,8 @@ const revalidate = async (req = express.request, res = express.response) => {
 
     res.status(201).json({
         ok: true,
-        msg: 'renew',
+        name: user.name,
+        uid: user.id,
         token
     })
 }

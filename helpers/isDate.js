@@ -1,10 +1,13 @@
-import { parse, isValid} from "date-fns";
+import moment from 'moment'
 
 export const isDate =  ( value ) => {
     
     if( !value ) return false
 
-    if( isValid(value) ) return true
+    const date = moment( value )
+
+
+    if( date.isValid() ) return true
 
     else return false
     
