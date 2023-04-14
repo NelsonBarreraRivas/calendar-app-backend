@@ -22,7 +22,24 @@ const app = express()
 connectDB()
 
 // CORS
-app.use( cors() )
+
+const whiteList = [
+    process.env.FRONTEND_URL
+];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whiteList.includes(origin)) {
+            callback(null, true)
+
+        } else {
+            callback(new Error("Error de Cors"))
+        }
+    },
+}
+
+app.use(cors(corsOptions))
+
 
 // Directorio publico
 app.use( express.static('public') )
