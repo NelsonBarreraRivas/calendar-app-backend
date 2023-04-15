@@ -30,11 +30,9 @@ const whiteList = [
 const corsOptions = {
     origin: function (origin, callback) {
         if (whiteList.includes(origin)) {
-            console.log('entro');
             callback(null, true)
 
         } else {
-            console.log('no entro');
             callback(new Error("Error de Cors"))
         }
     },
