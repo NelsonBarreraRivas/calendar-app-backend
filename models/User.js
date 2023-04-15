@@ -18,6 +18,10 @@ const userSchema = Schema({
     token: {
         type: String
     },
+    photoURL:{
+        type: String,
+        required: true
+    },
     confirmed: {
         type: Boolean,
         default: false,

@@ -17,6 +17,14 @@ const register = async (req = express.request, res = express.response) => {
             })
         }
 
+        const [ first, last ] = req.body.name.split(' ')
+
+        if( first && last ){
+            req.body.photoURL = `https://ui-avatars.com/api/?name=${first}+${last}&rounded=true`
+        }else if( first ){
+            req.body.photoURL = `https://ui-avatars.com/api/?name=${first}&rounded=true`
+        }
+
         user = new User(req.body)
 
         await user.save()
@@ -28,7 +36,8 @@ const register = async (req = express.request, res = express.response) => {
             msg: 'registro',
             uid: user.id,
             name: user.name,
-            token: token
+            token: token,
+            photoURL: user.photoURL
         })
     } catch (error) {
         console.log(error);
@@ -64,7 +73,8 @@ const login = async (req = express.request, res = express.response) => {
                 ok: true,
                 uid: user.id,
                 name: user.name,
-                token: token
+                token: token,
+                photoURL: user.photoURL
             })
 
         } else {
@@ -94,7 +104,8 @@ const revalidate = async (req = express.request, res = express.response) => {
         ok: true,
         name: user.name,
         uid: user.id,
-        token
+        token,
+        photoURL: user.photoURL
     })
 }
 
